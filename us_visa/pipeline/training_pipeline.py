@@ -5,11 +5,11 @@ from us_visa.components.data_ingestion import DataIngestion
 from us_visa.components.data_validation import DataValidation
 
 from us_visa.entity.config_entity import (DataIngestionConfig,
-                                          DataValidationConfig)
+                                         DataValidationConfig)
 
 from us_visa.entity.artifact_entity import (DataIngestionArtifact,
-                                            DataValidationArtifact,)
-
+                                            DataValidationArtifact,
+                                            DataTransformationArtifact)
 
 class TrainPipeline():
     def __init__(self):
@@ -62,6 +62,8 @@ class TrainPipeline():
             raise USvisaException(e, sys) from e
      
 
+
+
     
     def run_pipeline(self, ) -> None:
         """
@@ -70,6 +72,7 @@ class TrainPipeline():
         try:
             data_ingestion_artifact = self.start_data_ingestion()
             data_validation_artifact = self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
-
+           
+            
         except Exception as e:
             raise USvisaException(e, sys)
